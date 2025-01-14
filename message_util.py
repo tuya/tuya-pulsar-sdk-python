@@ -6,7 +6,7 @@ from Crypto.Cipher import AES
 
 def decrypt_message(pulsar_message, access_key):
     payload = pulsar_message.data().decode('utf-8')
-    print("---\nreceived message origin payload: %s" % payload)
+    # print("---\nreceived message origin payload: %s" % payload)
     # handler payload
     decrypt_model = pulsar_message.properties().get("em")
     # print("---\nreceived message decrypt_model: %s " % decrypt_model )

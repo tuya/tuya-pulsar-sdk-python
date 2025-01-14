@@ -37,11 +37,11 @@ while True:
     try:
         pulsar_message = consumer.receive()
         msg_id = message_id(pulsar_message.message_id())
-        print("---\n received message message_id: %s" % msg_id)
+        print("---\n received message message_id: %s encrypt message: %s" % (msg_id, pulsar_message.data()))
         decrypt_mssage = decrypt_message(pulsar_message, ACCESS_KEY)
+        print("---\n message decrypt message_id: %s decrypt message: %s" % (msg_id, decrypt_mssage))
         handle_message(pulsar_message, decrypt_mssage, msg_id)
-        print("---\n message decrypt message: %s" % decrypt_mssage)
-        consumer.acknowledge(pulsar_message)
+        consumer.acknowledge_cumulative(pulsar_message)
     except pulsar.Interrupted:
         print("Stop receiving messages")
         break
